@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
+    //Handles the event of when someone clicks a menu item. Starts the relevant fragment
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -64,6 +65,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mToolbar.setTitle("Overview");
             }
             break;
+            case(R.id.nav_my_matches):{
+                MatchesFragment matchesFragment = new MatchesFragment();
+                ft.replace(R.id.fragment_container, matchesFragment);
+                ft.commit();
+                mToolbar.setTitle("My Matches");
+            }
+
+            break;
+            case(R.id.nav_training_plans):{
+                TrainingPlansFragment trainingFragment = new TrainingPlansFragment();
+                ft.replace(R.id.fragment_container, trainingFragment);
+                ft.commit();
+                mToolbar.setTitle("Training Plans");
+            }
+
+            break;
+            case(R.id.nav_nutrition_plans):{
+                NutritionPlansFragment nutritionFragment = new NutritionPlansFragment();
+                ft.replace(R.id.fragment_container, nutritionFragment);
+                ft.commit();
+                mToolbar.setTitle("Nutrition Plans");
+            }
+
+            break;
+            case(R.id.nav_profile):{
+                ProfileFragment profileFragment = new ProfileFragment();
+                ft.replace(R.id.fragment_container, profileFragment);
+                ft.commit();
+                mToolbar.setTitle("My Profile");
+            }
+
+            break;
+            case(R.id.nav_settings):{
+                SettingsFragment settingsFragment = new SettingsFragment();
+                ft.replace(R.id.fragment_container, settingsFragment);
+                ft.commit();
+                mToolbar.setTitle("Settings");
+            }
+
+            break;
+
         }
 
         mDrawerLayout.closeDrawer(GravityCompat.START);
