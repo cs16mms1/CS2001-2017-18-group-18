@@ -4,5 +4,25 @@
         android:id="@+id/nav_overview"
         android:title="Overview">
     </item>
-    
+    <item
+        android:id="@+id/nav_my_matches"
+        android:title="My Matches">
+    </item>
+    <item
+        android:id="@+id/nav_training_plans"
+        android:title="Training Plans">
+    </item>
+    <item
+        android:id="@+id/nav_nutrition_plans"
+        android:title="Nutrition Plans">
+    </item>
+    <item
+        android:id="@+id/nav_profile"
+        android:title="My Profile">
+    </item>
+    <item
+        android:id="@+id/nav_settings"
+        android:title="Settings">
+    </item>
+
 </menu>
