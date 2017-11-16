@@ -2,27 +2,33 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_overview"
-        android:title="Overview">
+        android:title="Overview"
+        android:icon="@drawable/ic_overview">
     </item>
     <item
         android:id="@+id/nav_my_matches"
-        android:title="My Matches">
+        android:title="My Matches"
+        android:icon="@drawable/ic_matches">
     </item>
     <item
         android:id="@+id/nav_training_plans"
-        android:title="Training Plans">
+        android:title="Training Plans"
+        android:icon="@drawable/ic_training">
     </item>
     <item
         android:id="@+id/nav_nutrition_plans"
-        android:title="Nutrition Plans">
+        android:title="Nutrition Plans"
+        android:icon="@drawable/ic_nutrition">
     </item>
     <item
         android:id="@+id/nav_profile"
-        android:title="My Profile">
+        android:title="My Profile"
+        android:icon="@drawable/ic_profile">
     </item>
     <item
         android:id="@+id/nav_settings"
-        android:title="Settings">
+        android:title="Settings"
+        android:icon="@drawable/ic_settings">
     </item>
 
 </menu>
