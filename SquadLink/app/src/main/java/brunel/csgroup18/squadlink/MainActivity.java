@@ -37,6 +37,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //Starts the overview fragment as default(overview fragment is at index 0 of menu list)
+        onNavigationItemSelected(navigationView.getMenu().getItem(0));
+
     }
 
     @Override
