@@ -98,6 +98,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 ft.commit();
                 mToolbar.setTitle("My Profile");
             }
+            case(R.id.nav_teamfinder):{
+                TeamFinderFragment teamFinderFragment = new TeamFinderFragment();
+                ft.replace(R.id.fragment_container, teamFinderFragment);
+                ft.commit();
+                mToolbar.setTitle("Team Finder");
+            }
 
             break;
             case(R.id.nav_settings):{
