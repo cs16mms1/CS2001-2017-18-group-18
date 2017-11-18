@@ -2,8 +2,10 @@ package brunel.csgroup18.squadlink;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private Toolbar mToolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 ft.commit();
                 mToolbar.setTitle("My Profile");
             }
+            break;
             case(R.id.nav_teamfinder):{
                 TeamFinderFragment teamFinderFragment = new TeamFinderFragment();
                 ft.replace(R.id.fragment_container, teamFinderFragment);
