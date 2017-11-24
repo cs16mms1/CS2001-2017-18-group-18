@@ -1,7 +1,9 @@
 package brunel.csgroup18.squadlink;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +33,21 @@ public class SignInActivity extends AppCompatActivity {
 
         userTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sUserType.setAdapter(userTypeAdapter);
+
+        bLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        bRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignInActivity.this,RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }
