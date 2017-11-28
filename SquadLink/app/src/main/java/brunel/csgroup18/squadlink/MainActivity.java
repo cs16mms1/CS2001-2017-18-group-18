@@ -61,7 +61,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-
+        
+        //Depending on the menu item clicked, a case will be triggered starting a fragment
         switch (item.getItemId()){
 
             case(R.id.nav_overview):{
@@ -120,7 +121,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             break;
 
         }
-
+        
+        //Closes naavigation drawer once an item has been selected
         mDrawerLayout.closeDrawer(GravityCompat.START);
 
         return true;
