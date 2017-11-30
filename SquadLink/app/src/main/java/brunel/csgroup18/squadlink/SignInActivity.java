@@ -29,7 +29,7 @@ public class SignInActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in);
+        setContentView(R.layout.activity_login_provisional);
 
         sUserType = (Spinner) findViewById(R.id.spinner_usertype);
         etUsername = (EditText) findViewById(R.id.et_username);

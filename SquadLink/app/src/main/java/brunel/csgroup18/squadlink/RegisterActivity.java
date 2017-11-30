@@ -32,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_register_provisional);
 
         sUserType = (Spinner) findViewById(R.id.spinner_usertype);
         etUsername = (EditText) findViewById(R.id.et_username);
