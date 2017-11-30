@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -18,43 +19,50 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class SignInActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     private Spinner sUserType;
     private EditText etUsername;
+    private EditText etEmail;
     private EditText etPassword;
-    private Button bLogin;
+    private EditText etPasswordRetype;
+    private EditText etPhone;
     private Button bRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_provisional);
+        setContentView(R.layout.activity_register_provisional);
 
         sUserType = (Spinner) findViewById(R.id.spinner_usertype);
         etUsername = (EditText) findViewById(R.id.et_username);
-        etPassword = (EditText) findViewById(R.id.et_password);
-        bLogin = (Button) findViewById(R.id.button_login);
-        bRegister = (Button) findViewById(R.id.button_register);
+        etEmail = (EditText) findViewById(R.id.et_email);
+        etPassword = (EditText) findViewById(R.id.et_new_password);
+        etPasswordRetype = (EditText) findViewById(R.id.et_retype_password);
+        etPhone = (EditText) findViewById(R.id.et_phone);
+        bRegister = (Button) findViewById(R.id.button_registration);
 
         ArrayAdapter<String> userTypeAdapter = new ArrayAdapter<String>
-                (SignInActivity.this, android.R.layout.simple_selectable_list_item,getResources().getStringArray(R.array.userTypes));
+                (RegisterActivity.this, android.R.layout.simple_selectable_list_item,getResources().getStringArray(R.array.userTypes));
 
         userTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sUserType.setAdapter(userTypeAdapter);
 
-        bLogin.setOnClickListener(new View.OnClickListener() {
+        bRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String username = etUsername.getText().toString();
-                String password = etPassword.getText().toString();
+                String newPassword = etPassword.getText().toString();
+                String passwordRetype = etPasswordRetype.getText().toString();
+                String email = etEmail.getText().toString();
                 String userType = sUserType.getSelectedItem().toString();
+                String phone = etPhone.getText().toString();
+                Log.i("Strings Parsed",username+newPassword+passwordRetype+email+userType);
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                         Log.i("Response","Received response");
                         try {
 
@@ -65,14 +73,14 @@ public class SignInActivity extends AppCompatActivity {
                             Log.i("Success",jsonResponse.toString());
 
                             if(success){
-                                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                                SignInActivity.this.startActivity(intent);
+                                Intent intent = new Intent(RegisterActivity.this, SignInActivity.class);
+                                RegisterActivity.this.startActivity(intent);
                                 Log.i("Registration","Success");
                             }
                             else{
                                 Log.i("Registration","Fail");
-                                AlertDialog.Builder builder = new AlertDialog.Builder(SignInActivity.this);
-                                builder.setMessage("Login Failed")
+                                AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                                builder.setMessage("Register Failed")
                                         .setNegativeButton("Retry", null)
                                         .create()
                                         .show();
@@ -81,25 +89,20 @@ public class SignInActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                     }
                 };
 
-                LoginRequest loginRequest = new LoginRequest(username, password, userType, responseListener);
-                RequestQueue queue = Volley.newRequestQueue(SignInActivity.this);
-                queue.add(loginRequest);
+                if(newPassword.equals(passwordRetype)){
+                    RegisterRequest registerRequest = new RegisterRequest(username, newPassword, email,phone,userType, responseListener);
+                    RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
+                    queue.add(registerRequest);
+                }
 
+                else{
+                    Toast.makeText(RegisterActivity.this,"Passwords don't match",Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
-
-        bRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SignInActivity.this,RegisterActivity.class);
-                startActivity(intent);
-            }
-        });
-
     }
 }
