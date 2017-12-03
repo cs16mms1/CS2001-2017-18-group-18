@@ -73,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
                             Log.i("Success",jsonResponse.toString());
 
                             if(success){
-                                Intent intent = new Intent(RegisterActivity.this, SignInActivity.class);
+                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                 RegisterActivity.this.startActivity(intent);
                                 Log.i("Registration","Success");
                             }

@@ -1,5 +1,7 @@
 package brunel.csgroup18.squadlink;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -11,19 +13,49 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private Toolbar mToolbar;
-
+    private String username;
+    private  String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Get Extras from login
+        Intent intentExtras = getIntent();
+        Bundle extrasBundle = intentExtras.getExtras();
+
+        //Reference the navigation header to change header text
+        NavigationView nav = (NavigationView) findViewById(R.id.nav_view);
+        View header = nav.getHeaderView(0);
+        TextView headerText = (TextView) header.findViewById(R.id.usernameHeader);
+
+        //If the bundle contains items...
+        if(!extrasBundle.isEmpty()){
+
+            //If it contains the username
+            if(extrasBundle.containsKey("username")){
+                username= extrasBundle.getString("username");
+                Log.i("Username passed",username);
+                //Set the header to welcome that user
+                headerText.setText("Welcome, "+username);
+            }
+            if(extrasBundle.containsKey("id")){
+                id = extrasBundle.getString("id");
+                Log.i("ID Passed", id);
+            }
+        }
 
         //Using our own action bar as default was disabled when creating nav drawer
         mToolbar = (Toolbar) findViewById(R.id.nav_action_bar);

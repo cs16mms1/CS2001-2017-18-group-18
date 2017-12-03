@@ -18,7 +18,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class SignInActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private Spinner sUserType;
     private EditText etUsername;
@@ -38,7 +38,7 @@ public class SignInActivity extends AppCompatActivity {
         bRegister = (Button) findViewById(R.id.button_register);
 
         ArrayAdapter<String> userTypeAdapter = new ArrayAdapter<String>
-                (SignInActivity.this, android.R.layout.simple_selectable_list_item,getResources().getStringArray(R.array.userTypes));
+                (LoginActivity.this, android.R.layout.simple_selectable_list_item,getResources().getStringArray(R.array.userTypes));
 
         userTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sUserType.setAdapter(userTypeAdapter);
@@ -47,7 +47,7 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String username = etUsername.getText().toString();
+                final String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
                 String userType = sUserType.getSelectedItem().toString();
 
@@ -65,13 +65,19 @@ public class SignInActivity extends AppCompatActivity {
                             Log.i("Success",jsonResponse.toString());
 
                             if(success){
-                                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                                SignInActivity.this.startActivity(intent);
+
+                                String idReceived = jsonResponse.getString("id");
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putString("username",username);
+                                bundle.putString("id",idReceived);
+                                intent.putExtras(bundle);
+                                LoginActivity.this.startActivity(intent);
                                 Log.i("Registration","Success");
                             }
                             else{
                                 Log.i("Registration","Fail");
-                                AlertDialog.Builder builder = new AlertDialog.Builder(SignInActivity.this);
+                                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                                 builder.setMessage("Login Failed")
                                         .setNegativeButton("Retry", null)
                                         .create()
@@ -86,7 +92,7 @@ public class SignInActivity extends AppCompatActivity {
                 };
 
                 LoginRequest loginRequest = new LoginRequest(username, password, userType, responseListener);
-                RequestQueue queue = Volley.newRequestQueue(SignInActivity.this);
+                RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
                 queue.add(loginRequest);
 
 
@@ -96,7 +102,7 @@ public class SignInActivity extends AppCompatActivity {
         bRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SignInActivity.this,RegisterActivity.class);
+                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent);
             }
         });
