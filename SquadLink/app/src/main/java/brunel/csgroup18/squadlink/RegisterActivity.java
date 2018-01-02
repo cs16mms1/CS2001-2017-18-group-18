@@ -27,6 +27,8 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText etPassword;
     private EditText etPasswordRetype;
     private EditText etPhone;
+    private EditText etFirstName;
+    private EditText etLastName;
     private Button bRegister;
 
     @Override
@@ -40,6 +42,8 @@ public class RegisterActivity extends AppCompatActivity {
         etPassword = (EditText) findViewById(R.id.et_new_password);
         etPasswordRetype = (EditText) findViewById(R.id.et_retype_password);
         etPhone = (EditText) findViewById(R.id.et_phone);
+        etFirstName = (EditText) findViewById(R.id.et_first_name);
+        etLastName = (EditText) findViewById(R.id.et_last_name);
         bRegister = (Button) findViewById(R.id.button_registration);
 
         ArrayAdapter<String> userTypeAdapter = new ArrayAdapter<String>
@@ -58,6 +62,8 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = etEmail.getText().toString();
                 String userType = sUserType.getSelectedItem().toString();
                 String phone = etPhone.getText().toString();
+                String firstName = etFirstName.getText().toString();
+                String lastName = etLastName.getText().toString();
                 Log.i("Strings Parsed",username+newPassword+passwordRetype+email+userType);
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -93,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
                 };
 
                 if(newPassword.equals(passwordRetype)){
-                    RegisterRequest registerRequest = new RegisterRequest(username, newPassword, email,phone,userType, responseListener);
+                    RegisterRequest registerRequest = new RegisterRequest(username, newPassword, email,phone,userType, firstName, lastName, responseListener);
                     RequestQueue queue = Volley.newRequestQueue(RegisterActivity.this);
                     queue.add(registerRequest);
                 }

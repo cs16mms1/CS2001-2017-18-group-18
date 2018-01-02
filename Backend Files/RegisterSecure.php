@@ -15,6 +15,8 @@
     $email = $_POST["email"];
     $phone = $_POST["phone"];
     $type = $_POST["type"];
+		$firstName = $_POST["first"];
+		$lastName = $_POST["last"];
 
     var_dump($username,$password,$email,$phone,$type);
 
@@ -50,13 +52,14 @@
 			$query = "SELECT user_id FROM users WHERE username = '$username'";
 			$result = mysqli_query($connect, $query);
 			$row = mysqli_fetch_assoc($result);
-			$user_id = $row['user_id'];
+			$user_id = (int) $row['user_id'];
 			var_dump($user_id);
 		}
 
 		function createDefaultProfile(){
-			global $user_id,$connect;
-			$query = mysqli_query($connect,"INSERT INTO profile (first_name,user_id) VALUES ('Tester',$user_id)");
+			global $user_id,$connect, $firstName, $lastName;
+			var_dump($firstName, $lastName);
+			$query = mysqli_query($connect,"INSERT INTO profile (first_name,last_name, user_id) VALUES ($firstName,$lastName,$user_id)");
 		}
 
     $response = array();
