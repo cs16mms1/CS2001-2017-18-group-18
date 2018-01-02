@@ -1,70 +1,73 @@
 <?php
-	
-    $connect = mysqli_connect('localhost', 'user', 'password');
-    
+
+    $connect = mysqli_connect('localhost', 'squadlinkuser', 'squadLinkPass1!','squadlinkdb');
+
     // Check for database connection error
         if (mysqli_connect_errno()) {
             echo "Failed to connect to MySQL: " . mysqli_connect_error();
         }
-        
-            var_dump(mysqli_select_db($connect,'db'));
-            
-    //Variables posted from Android app
+
+            var_dump(mysqli_select_db($connect,'squadlinkdb'));
+
+
     $username = $_POST["username"];
     $password = $_POST["password"];
     $email = $_POST["email"];
     $phone = $_POST["phone"];
     $type = $_POST["type"];
-    
+
     var_dump($username,$password,$email,$phone,$type);
-    
-    
+
+
      function registerUser() {
         global $connect, $username, $password, $email,$phone,$type;
-		 //Create new variable that hashes password
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
             $statement = mysqli_stmt_init($connect);
-		 //Prepare SQL statement
     $statement = mysqli_prepare($connect, "INSERT INTO users (username, password, email, phone, type) VALUES (?, ?, ?, ?, ?)");
-		 //Bind the variables posted to '?'s in query
     mysqli_stmt_bind_param($statement, "sssss", $username, $passwordHash, $email, $phone, $type);
-		 //Exectute query
     mysqli_stmt_execute($statement);
-        mysqli_stmt_close($statement);     
+        mysqli_stmt_close($statement);
+
     }
-    
+
     function usernameAvailable() {
         global $connect, $username;
-		
-		//Create a SQL query
-        $statement = mysqli_prepare($connect, "SELECT * FROM users WHERE username = ?"); 
-		//Bind variable to '?' in query
+        $statement = mysqli_prepare($connect, "SELECT * FROM users WHERE username = ?");
         mysqli_stmt_bind_param($statement, "s", $username);
-		//Execute statement
         mysqli_stmt_execute($statement);
         mysqli_stmt_store_result($statement);
-		//Count number of records returned
         $count = mysqli_stmt_num_rows($statement);
-        mysqli_stmt_close($statement); 
-		//If 0 is returned then username is available, return true
+        mysqli_stmt_close($statement);
         if ($count < 1){
-            return true; 
-		//Otherwise return false
+            return true;
         }else {
-            return false; 
+            return false;
         }
     }
-    
-	//Create default JSON response
+
+		function getUserId(){
+			global $username, $user_id,$connect;
+			$query = "SELECT user_id FROM users WHERE username = '$username'";
+			$result = mysqli_query($connect, $query);
+			$row = mysqli_fetch_assoc($result);
+			$user_id = $row['user_id'];
+			var_dump($user_id);
+		}
+
+		function createDefaultProfile(){
+			global $user_id,$connect;
+			$query = mysqli_query($connect,"INSERT INTO profile (first_name,user_id) VALUES ('Tester',$user_id)");
+		}
+
     $response = array();
     $response["success"] = false;
-	
-	//Call function to check if username is available, if true call register user function
     if (usernameAvailable()){
         registerUser();
-        $response["success"] = true;  
+				getUserId();
+				createDefaultProfile();
+        $response["success"] = true;
     }
-    
-	//Send JSON string response
+
     echo json_encode($response);
+
 ?>
