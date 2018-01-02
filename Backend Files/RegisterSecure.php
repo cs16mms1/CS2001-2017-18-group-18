@@ -59,7 +59,7 @@
 		function createDefaultProfile(){
 			global $user_id,$connect, $firstName, $lastName;
 			var_dump($firstName, $lastName);
-			$query = mysqli_query($connect,"INSERT INTO profile (first_name,last_name, user_id) VALUES ($firstName,$lastName,$user_id)");
+			$query = mysqli_query($connect,"INSERT INTO profile (first_name,last_name,bio,profile_pic,user_id) VALUES ('$firstName','$lastName','New bio', 'default','$user_id')");
 		}
 
     $response = array();
