@@ -1,6 +1,6 @@
 <?php
 
-    $connect = mysqli_connect('localhost', 'squadlinkuser', 'squadLinkPass1!','squadlinkdb');
+    $connect = mysqli_connect('localhost', 'user', 'pass','db');
 
     // Check for database connection error
         if (mysqli_connect_errno()) {
