@@ -2,6 +2,7 @@ package brunel.csgroup18.squadlink;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -57,6 +58,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
 
+        //TODO Save user ID so all activities can access it
+        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences();
+
         //Using our own action bar as default was disabled when creating nav drawer
         mToolbar = (Toolbar) findViewById(R.id.nav_action_bar);
         setSupportActionBar(mToolbar);
@@ -93,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        
+
         //Depending on the menu item clicked, a case will be triggered starting a fragment
         switch (item.getItemId()){
 
@@ -153,10 +157,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             break;
 
         }
-        
+
         //Closes naavigation drawer once an item has been selected
         mDrawerLayout.closeDrawer(GravityCompat.START);
 
         return true;
     }
+
+
+
 }
