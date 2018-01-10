@@ -55,4 +55,4 @@ freeline/
 freeline_project_description.json
 
 # DB Connect Credentials
-dbconnect.php
+Backend Files/dbconnect.php
