@@ -27,6 +27,13 @@ public class ProfileFragment extends Fragment {
     private TextView tvName;
     private TextView tvBio;
 
+    private String profileId;
+    private String firstName;
+    private String lastName;
+    private String bio;
+    private String profilePic;
+
+
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -39,8 +46,8 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        TextView tvName = (TextView) view.findViewById(R.id.tvName);
-        TextView tvBio = (TextView) view.findViewById(R.id.tvBio);
+         tvName = (TextView) view.findViewById(R.id.tvName);
+         tvBio = (TextView) view.findViewById(R.id.tvBio);
 
         String id = MainActivity.getUserid();
 
@@ -51,6 +58,14 @@ public class ProfileFragment extends Fragment {
                 try {
                     JSONObject jsonResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
                     Log.i("Profile Success",response);
+
+                    firstName = jsonResponse.getString("first_name");
+                    lastName = jsonResponse.getString("last_name");
+                    bio = jsonResponse.getString("bio");
+                    profilePic = jsonResponse.getString("profile_pic");
+
+                    tvName.setText(firstName + " " + lastName);
+                    tvBio.setText(bio);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
