@@ -14,12 +14,14 @@ import java.util.Map;
 
 public class ProfileRequest extends StringRequest {
 
-    private static final String REGISTER_REQUEST_URL = "http://www.squadlink.co.uk/RegisterSecure.php/";
+    private static final String REGISTER_REQUEST_URL = "http://www.squadlink.co.uk/ReturnProfile.php/";
     private Map<String, String> params;
 
-    public ProfileRequest( Response.Listener<String> listener){
+    public ProfileRequest( String id, Response.Listener<String> listener){
         super(Method.POST, REGISTER_REQUEST_URL, listener, null);
 
+        params = new HashMap<>();
+        params.put("id", id);
         Log.i("Put Params","Inserted all");
 
     }
