@@ -27,8 +27,19 @@
 		//If inputted password is equivalent to hashed stored password then return true
         if (password_verify($password,$colPassword)) {
             $response["success"] = true;
+            getUserId();
         }
     }
+
+    function getUserId(){
+			global $username, $id,$connect,$response;
+			$query = "SELECT user_id FROM users WHERE username = '$username'";
+			$result = mysqli_query($connect, $query);
+			$row = mysqli_fetch_assoc($result);
+			$id = (int) $row['user_id'];
+      $response["id"] = $id;
+			var_dump($id);
+		}
 
 	//Send response back to app
     echo json_encode($response);

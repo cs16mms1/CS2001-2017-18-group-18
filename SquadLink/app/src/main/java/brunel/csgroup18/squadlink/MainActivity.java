@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle mToggle;
     private Toolbar mToolbar;
     private String username;
-    private  String id;
+    public static String userid ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +53,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 headerText.setText("Welcome, "+username);
             }
             if(extrasBundle.containsKey("id")){
-                id = extrasBundle.getString("id");
-                Log.i("ID Passed", id);
+                userid = extrasBundle.getString("id");
+                Log.i("ID Passed", userid);
             }
         }
 
-        //TODO Save user ID so all activities can access it
-        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences();
 
         //Using our own action bar as default was disabled when creating nav drawer
         mToolbar = (Toolbar) findViewById(R.id.nav_action_bar);
@@ -164,6 +162,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-
-
+    public static String getUserid() {
+        return userid;
+    }
 }
