@@ -33,8 +33,6 @@ public class ProfileFragment extends Fragment {
     private String bio;
     private String profilePic;
 
-
-
     public ProfileFragment() {
         // Required empty public constructor
     }
