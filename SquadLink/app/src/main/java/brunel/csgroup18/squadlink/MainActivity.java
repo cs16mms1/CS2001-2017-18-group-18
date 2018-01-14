@@ -2,6 +2,7 @@ package brunel.csgroup18.squadlink;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle mToggle;
     private Toolbar mToolbar;
     private String username;
-    private  String id;
+    public static String userid ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +53,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 headerText.setText("Welcome, "+username);
             }
             if(extrasBundle.containsKey("id")){
-                id = extrasBundle.getString("id");
-                Log.i("ID Passed", id);
+                userid = extrasBundle.getString("id");
+                Log.i("ID Passed", userid);
             }
         }
+
 
         //Using our own action bar as default was disabled when creating nav drawer
         mToolbar = (Toolbar) findViewById(R.id.nav_action_bar);
@@ -93,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        
+
         //Depending on the menu item clicked, a case will be triggered starting a fragment
         switch (item.getItemId()){
 
@@ -153,10 +155,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             break;
 
         }
-        
+
         //Closes naavigation drawer once an item has been selected
         mDrawerLayout.closeDrawer(GravityCompat.START);
 
         return true;
+    }
+
+    public static String getUserid() {
+        return userid;
     }
 }
