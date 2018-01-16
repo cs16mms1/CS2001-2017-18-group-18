@@ -16,7 +16,7 @@
         <h2>Create a Team</h2>
       </div>
 
-      <form method="post" action="LoginSecure.php">
+      <form method="post" action="TeamCreation.php">
 
         <div class="input-group">
           <label>Team Name</label>
