@@ -29,7 +29,7 @@
             $response["success"] = true;
             getUserId();
 
-            $_SESSION['id'] = 54;
+            $_SESSION['id'] = $id;
             header("Location: MyTeams.php");
         }
     }
