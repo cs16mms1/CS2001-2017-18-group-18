@@ -7,15 +7,16 @@ $teamname = $_POST["teamname"];
 $postcode = $_POST["postcode"];
 $email = $_POST["email"];
 $phone = $_POST["phone"];
+$website = $_POST["website"];
 $id = $_SESSION['id'];
 
 
   insertTeam();
 
       function insertTeam(){
-        global $connect, $teamname, $postcode, $email, $phone;
+        global $connect, $teamname, $postcode, $email, $phone, $website;
               var_dump($connect,$teamname,$postcode,$email,$phone);
-        $query = mysqli_query($connect,"INSERT INTO team (teamname, postcode, email, phone)  VALUES ('$teamname','$postcode','$email','$phone')");
+        $query = mysqli_query($connect,"INSERT INTO team (teamname, postcode, email, phone, website)  VALUES ('$teamname','$postcode','$email','$phone','$website')");
         getTeamId();
         insertIntoLink();
       }

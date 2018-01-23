@@ -35,6 +35,10 @@
           <input type="text" name="phone">
         </div>
         <div class="input-group">
+          <label>Website</label>
+          <input type="text" name="website">
+        </div>
+        <div class="input-group">
           <button type="submit" class="btn" name="reg_user">Create</button>
         </div>
       </form>
