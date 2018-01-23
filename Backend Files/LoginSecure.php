@@ -29,8 +29,11 @@
             $response["success"] = true;
             getUserId();
 
+						//Send response back to app
+							echo json_encode($response);
+
             $_SESSION['id'] = $id;
-            header("Location: MyTeams.php");
+            redirect("MyTeams.php");
         }
     }
 
@@ -43,6 +46,22 @@
       $response["id"] = $id;
 		}
 
-	//Send response back to app
-    echo json_encode($response);
+		function redirect($url)
+{
+    if (!headers_sent())
+    {
+        header('Location: '.$url);
+        exit;
+        }
+    else
+        {
+        echo '<script type="text/javascript">';
+        echo 'window.location.href="'.$url.'";';
+        echo '</script>';
+        echo '<noscript>';
+        echo '<meta http-equiv="refresh" content="0;url='.$url.'" />';
+        echo '</noscript>'; exit;
+    }
+}
+
 ?>
