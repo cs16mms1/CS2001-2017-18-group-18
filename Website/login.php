@@ -1,6 +1,9 @@
+<?php
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html>
-
 <head>
 <title>Login</title>
 <link rel="stylesheet" href="stylesheets/registerstyles.css">

@@ -1,4 +1,5 @@
 <?php
+	session_start();
    include 'dbconnect.php';
 
 	//Create variables based on variables posted from Android
@@ -6,7 +7,6 @@
     $password = $_POST["password"];
     $type = $_POST["type"];
 
-     var_dump($username,$password,$type);
 
     $statement = mysqli_stmt_init($connect);
 	//Prepare SQL query
@@ -28,6 +28,12 @@
         if (password_verify($password,$colPassword)) {
             $response["success"] = true;
             getUserId();
+
+						//Send response back to app
+							echo json_encode($response);
+
+            $_SESSION['id'] = $id;
+            redirect("MyTeams.php");
         }
     }
 
@@ -38,9 +44,24 @@
 			$row = mysqli_fetch_assoc($result);
 			$id = (int) $row['user_id'];
       $response["id"] = $id;
-			var_dump($id);
 		}
 
-	//Send response back to app
-    echo json_encode($response);
+		function redirect($url)
+{
+    if (!headers_sent())
+    {
+        header('Location: '.$url);
+        exit;
+        }
+    else
+        {
+        echo '<script type="text/javascript">';
+        echo 'window.location.href="'.$url.'";';
+        echo '</script>';
+        echo '<noscript>';
+        echo '<meta http-equiv="refresh" content="0;url='.$url.'" />';
+        echo '</noscript>'; exit;
+    }
+}
+
 ?>
