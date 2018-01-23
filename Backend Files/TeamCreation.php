@@ -11,21 +11,26 @@ $id = $_SESSION['id'];
 
 
   insertTeam();
-  getTeamId();
+
       function insertTeam(){
         global $connect, $teamname, $postcode, $email, $phone;
               var_dump($connect,$teamname,$postcode,$email,$phone);
         $query = mysqli_query($connect,"INSERT INTO team (teamname, postcode, email, phone)  VALUES ('$teamname','$postcode','$email','$phone')");
-
+        getTeamId();
+        insertIntoLink();
       }
 
       function getTeamId(){
-        global $connect, $teamname;
+        global $connect, $teamname, $teamid;
         $result = mysqli_query($connect, "SELECT team_id FROM team WHERE teamname = '$teamname' ");
         $row = mysqli_fetch_assoc($result);
   			$teamid = (int) $row['team_id'];
         var_dump($teamid);
       }
 
+      function insertIntoLink(){
+        global $connect, $id, $teamid;
+        $query = mysqli_query($connect,"INSERT INTO users_has_team (users_user_id, team_team_id) VALUES ('$id','$teamid')");
+      }
 
   ?>
