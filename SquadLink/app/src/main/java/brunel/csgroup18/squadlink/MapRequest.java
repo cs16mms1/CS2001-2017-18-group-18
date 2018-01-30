@@ -15,14 +15,14 @@ import java.util.Map;
 
 public class MapRequest extends StringRequest{
 
-    private static final String REGISTER_REQUEST_URL = "http://www.squadlink.co.uk/ReturnProfile.php/";
+    private static final String REGISTER_REQUEST_URL = "http://www.squadlink.co.uk/MapRequest.php/";
     private Map<String, String> params;
 
-    public MapRequest( String postcode, Response.Listener<String> listener){
+    public MapRequest( String teamname, Response.Listener<String> listener){
         super(Request.Method.POST, REGISTER_REQUEST_URL, listener, null);
 
         params = new HashMap<>();
-        params.put("postcode", postcode);
+        params.put("teamname", teamname);
         Log.i("Put Params","Inserted all");
 
     }

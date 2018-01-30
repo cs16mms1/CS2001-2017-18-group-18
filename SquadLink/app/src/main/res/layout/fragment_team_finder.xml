@@ -21,7 +21,8 @@
         android:layout_width="260dp"
         android:layout_height="60dp"
         android:ems="10"
-        android:inputType="textPostalAddress"/>
+        android:inputType="textPostalAddress"
+        android:hint="Search Team Name..."/>
 
     <Button
         android:id="@+id/search_button"
