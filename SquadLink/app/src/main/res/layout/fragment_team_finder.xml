@@ -5,13 +5,29 @@
              tools:context="brunel.csgroup18.squadlink.TeamFinderFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
     <com.google.android.gms.maps.MapView
 
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
         android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
         >
 
     </com.google.android.gms.maps.MapView>
+
+    <EditText
+        android:id="@+id/postcode_search"
+        android:layout_width="260dp"
+        android:layout_height="60dp"
+        android:ems="10"
+        android:inputType="textPostalAddress"/>
+
+    <Button
+        android:id="@+id/search_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="Search"/>
 
 </FrameLayout>
