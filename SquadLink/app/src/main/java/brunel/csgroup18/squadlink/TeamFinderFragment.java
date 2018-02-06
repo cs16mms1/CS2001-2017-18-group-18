@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -26,6 +27,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,7 +36,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.List;
 
-public class TeamFinderFragment extends Fragment implements OnMapReadyCallback {
+public class TeamFinderFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
     GoogleMap map;
     MapView mapView;
@@ -71,7 +74,7 @@ public class TeamFinderFragment extends Fragment implements OnMapReadyCallback {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String searchTerm = etSearch.getText().toString();
+                final String searchTerm = etSearch.getText().toString();
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
@@ -82,6 +85,7 @@ public class TeamFinderFragment extends Fragment implements OnMapReadyCallback {
                             Log.i("JSON",response);
                             JSONObject jsonResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
                             String postcode = jsonResponse.getString("postcode");
+                            Log.i("postcode",postcode);
                             List<Address> addressList = null;
                             Geocoder geocoder = new Geocoder(getContext());
 
@@ -90,13 +94,11 @@ public class TeamFinderFragment extends Fragment implements OnMapReadyCallback {
                                 Address address = addressList.get(0);
                                 LatLng latLng = new LatLng(address.getLatitude(),address.getLongitude());
                                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
-
-
+                                placeJoinMarker(latLng,searchTerm);
 
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -113,10 +115,17 @@ public class TeamFinderFragment extends Fragment implements OnMapReadyCallback {
 
     }
 
+    private void placeJoinMarker(LatLng markerPosition, String searchTerm){
+
+        map.addMarker(new MarkerOptions().position(markerPosition).title("Team: "+searchTerm).snippet("Click this box to join team"));
+
+    }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        map.setOnInfoWindowClickListener(this);
 
         // Here, thisActivity is the current activity
         if (ContextCompat.checkSelfPermission(getActivity(),
@@ -155,5 +164,11 @@ public class TeamFinderFragment extends Fragment implements OnMapReadyCallback {
             }
         }
 
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+
+        Toast.makeText(getContext(),"Window clicked, nice one",Toast.LENGTH_SHORT).show();
     }
 }
