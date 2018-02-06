@@ -3,6 +3,7 @@ package brunel.csgroup18.squadlink;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Paint;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -43,6 +44,8 @@ public class TeamFinderFragment extends Fragment implements OnMapReadyCallback, 
     View mView;
     EditText etSearch;
     Button btnSearch;
+
+    private String team_id;
     private final static int   MY_PERMISSION_FINE_LOCATION=101;
 
     public TeamFinderFragment() {
@@ -85,6 +88,7 @@ public class TeamFinderFragment extends Fragment implements OnMapReadyCallback, 
                             Log.i("JSON",response);
                             JSONObject jsonResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
                             String postcode = jsonResponse.getString("postcode");
+                            team_id = jsonResponse.getString("team_id");
                             Log.i("postcode",postcode);
                             List<Address> addressList = null;
                             Geocoder geocoder = new Geocoder(getContext());
@@ -168,6 +172,27 @@ public class TeamFinderFragment extends Fragment implements OnMapReadyCallback, 
 
     @Override
     public void onInfoWindowClick(Marker marker) {
+
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i("Join Team Response","Received response");
+                try {
+
+                    Log.i("JSON",response);
+                    JSONObject jsonResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        JoinTeamRequest joinRequest = new JoinTeamRequest(MainActivity.getUserid(), team_id, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        queue.add(joinRequest);
 
         Toast.makeText(getContext(),"Window clicked, nice one",Toast.LENGTH_SHORT).show();
     }
