@@ -17,8 +17,31 @@ function addTeamMember(){
   mysqli_stmt_close($query);
 
   $response = array();
-  $response["success"] = true;
+
+  if(checkAdded()){
+    $response['success'] = true;
+  }
+  else{
+    $response['success'] = false;
+  }
+
   echo json_encode($response);
+
+}
+
+function checkAdded(){
+    global $team_id, $user_id, $connect;
+
+    $statement = mysqli_prepare($connect, "SELECT * FROM users_has_team WHERE users_user_id = '$user_id' AND team_team_id = '$team_id'");
+    mysqli_stmt_execute($statement);
+    mysqli_stmt_store_result($statement);
+    $count = mysqli_stmt_num_rows($statement);
+    mysqli_stmt_close($statement);
+    if ($count >= 1){
+        return true;
+    }else {
+        return false;
+    }
 }
 
  ?>

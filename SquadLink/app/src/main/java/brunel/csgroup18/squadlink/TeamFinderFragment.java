@@ -181,7 +181,7 @@ public class TeamFinderFragment extends Fragment implements OnMapReadyCallback, 
 
                     Log.i("JSON",response);
                     JSONObject jsonResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
-
+                    createToast(jsonResponse.getBoolean("success"));
 
 
                 } catch (JSONException e) {
@@ -194,6 +194,16 @@ public class TeamFinderFragment extends Fragment implements OnMapReadyCallback, 
         RequestQueue queue = Volley.newRequestQueue(getContext());
         queue.add(joinRequest);
 
-        Toast.makeText(getContext(),"Window clicked, nice one",Toast.LENGTH_SHORT).show();
     }
+
+    private void createToast(boolean response){
+        if(response){
+            Toast.makeText(getContext(),"Successfully joined club",Toast.LENGTH_SHORT);
+        }
+        else{
+            Toast.makeText(getContext(),"You're already a member of this club",Toast.LENGTH_SHORT);
+        }
+
+    }
+
 }
