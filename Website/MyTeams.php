@@ -10,7 +10,7 @@
 	returnTeams();
 
 	function returnTeams(){
-		global $connect, $user_id;
+		global $connect, $user_id,$teamname;
 		$query = "SELECT * FROM `team` INNER JOIN `users_has_team` ON
 							users_has_team.team_team_id = team.team_id WHERE
 							users_has_team.users_user_id = '$user_id'";
@@ -20,7 +20,8 @@
 		echo($row['teamname']);
 		echo ($row['team_id']);
 
-		$_SESSION['teamname'] = $row['teamname'];
+		$teamname = $row['teamname'];
+		$_SESSION['teamname'] = $teamname;
 		$_SESSION['team_id'] = $row['team_id'];
 
 	}
@@ -35,7 +36,12 @@
 		<title>My Teams</title>
 	</head>
 	<body>
-			<a href="CreateTeam.php">Create a Team</a>
+		<ul>
+			<li><a href="CreateTeam.php">Create a Team</a></li>
+
+			<li><a href="ManageTeam.php"><?php echo($teamname)?><a/></li>
+		</ul>
+
 
 	</body>
 </html>
