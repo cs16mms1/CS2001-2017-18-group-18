@@ -2,7 +2,6 @@
 <?php
   include 'dbconnect.php';
 
-
   echo($_POST['username']);
 
  ?>
@@ -15,5 +14,7 @@
   </head>
   <body>
 
+    <a href="TrainingPlan.php">Create training plan</a>
+    <a href="NutritionPlan.php">Create nutrition plan</a>
   </body>
 </html>
