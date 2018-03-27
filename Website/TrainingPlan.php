@@ -1,8 +1,7 @@
 <?php
   include 'dbconnect.php';
-
-  echo($_POST['username']);
-
+  session_start();
+  $username = $_GET['username'];
  ?>
 
 <!DOCTYPE html>
@@ -13,8 +12,7 @@
     <link rel="stylesheet" href="stylesheets/registerstyles.css">
   </head>
   <body>
-<form method="post" action="SendTraining.php">
-
+<form method="post" action="SendTraining.php?username=<?php echo $username ?>">
     <div class="input-group">
       <label>Enter Training Plan</label>
       <textarea name="trainingplan" style="width:600px;height:800px;"></textarea>

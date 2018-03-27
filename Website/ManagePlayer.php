@@ -14,7 +14,7 @@
   </head>
   <body>
 
-    <a href="TrainingPlan.php">Create training plan</a>
-    <a href="NutritionPlan.php">Create nutrition plan</a>
+    <a href="TrainingPlan.php?varname=<?php echo $_POST['username'] ?>">Create training plan</a>
+    <a href="NutritionPlan.php?varname=<?php echo $_POST['username'] ?>">Create nutrition plan</a>
   </body>
 </html>
