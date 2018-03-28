@@ -3,12 +3,14 @@ include 'dbconnect.php';
 
 echo ($_GET['username']);
 echo ($_POST['trainingplan']);
+echo ($_POST['name']);
 
 $username = $_GET['username'];
 $tptext = $_POST['trainingplan'];
+$tpname = $_POST['name'];
 $user_id;
 
-var_dump($username,$tptext);
+var_dump($username,$tptext,$tpname);
 
 getUserId();
 insertTrainingPlan();
@@ -25,8 +27,8 @@ function getUserId(){
 }
 
 function insertTrainingPlan(){
-global $username, $user_id, $connect, $tptext;
+global $username, $user_id, $connect, $tptext,$tpname;
 
-$query = mysqli_query($connect,"INSERT INTO trainingplans(tptext, users_user_id) VALUES ('$tptext','$user_id')");
+$query = mysqli_query($connect,"INSERT INTO trainingplans(tpname, tptext, users_user_id) VALUES ('$tpname','$tptext','$user_id')");
 }
 ?>
