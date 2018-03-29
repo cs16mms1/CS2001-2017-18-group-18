@@ -18,10 +18,12 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.LatLng;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -32,7 +34,9 @@ public class CoachTrainingFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private String tpTitle;
-    private  String tpText;
+    private String tpText;
+    private ArrayList<CTPData> arr = new ArrayList<CTPData>();
+    private TPAdapter mTPAdapter;
 
     public CoachTrainingFragment() {
         // Required empty public constructor
@@ -48,6 +52,9 @@ public class CoachTrainingFragment extends Fragment {
 
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mTPAdapter = new TPAdapter(getActivity());
+        mRecyclerView.setAdapter(mTPAdapter);
+
         String id = MainActivity.getUserid();
 
         Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -57,9 +64,26 @@ public class CoachTrainingFragment extends Fragment {
                 try {
 
                     Log.i("JSON",response);
-                    JSONObject jsonResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+                    //JSONObject jsonResponse = new JSONObject(response.substring(response.indexOf("{"), response.lastIndexOf("}") + 1));
+                    JSONArray jsonArray = new JSONArray(response);
 
+                    for(int i = 0 ; i < jsonArray.length();i++){
 
+                        JSONObject currentRecord = jsonArray.getJSONObject(i);
+
+                        int id = Integer.parseInt(currentRecord.getString("tp_id"));
+                        String title = currentRecord.getString("tpname");
+                        if(title.equals("")){
+                            title = "*Untitled*";
+                        }
+                        String text = currentRecord.getString("tptext");
+
+                        arr.add(new CTPData(id,title,text));
+
+                    }
+
+                    Log.i("Array List Values",arr.toString());
+                    mTPAdapter.setTitleList(arr);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
