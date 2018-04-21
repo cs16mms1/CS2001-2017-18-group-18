@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 
-public class SignInActivity extends AppCompatActivity  {
+public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
     public static String PACKAGE_NAME;
     static String value="",value1="",id="";//Variable Description
     static String genius[],uid[],ulid;
@@ -95,6 +95,47 @@ public class SignInActivity extends AppCompatActivity  {
         }
         return neww;
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    public void onClick(View v) {
+        value1 = value1.substring(1, value1.length() - 1); // remove first and last character
+        Scanner in = new Scanner(value1).useDelimiter("\\,"); //object "in" for scanner class created
+        int count = 0;//initialise count to 0
+        while (in.hasNext() == true) {
+            datab++;
+            String data = in.next();
+            String ID = data.substring(data.indexOf("=") + 1, data.indexOf("§"));//Delimit user IDs
+            System.out.println("***********************" + ID);//Display on console
+            if (ID.equalsIgnoreCase(UserEmail.getText().toString()) == true) {//Check if user ID entered is correct
+                ulid=ID+"";
+                count++;//If correct, count +1
+                Scanner inn = new Scanner(data).useDelimiter("\\§");// Scanner "inn"
+                int cc = 0;
+                while (inn.hasNext() == true) {//Loop to check password
+                    String details = inn.next();
+                    if (cc == 1) {
+                        if (details.equals(UserPassword.getText().toString()) == true) {
+                            ufname = inn.next();
+                            ulname = inn.next();
+                            new SignInActivity.PostClass(this).execute();
+                        } else {
+                            //txtView.setVisibility(View.VISIBLE);
+                            break;
+                        }
+                    }
+                    cc++;
+                }
+                break;
+            }
+        }
+        if (count == 0) {
+            // txtView.setText("Wrong Email ID");
+            // txtView.setVisibility(View.VISIBLE);
+        }
+
+    }
+
 
 
 }
