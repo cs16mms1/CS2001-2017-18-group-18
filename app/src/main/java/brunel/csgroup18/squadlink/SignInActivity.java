@@ -49,13 +49,18 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         UserEmail = (EditText) findViewById(R.id.editText);//Initialise UserEmail
         UserEmail.setText("tanvir_ali@hotmail.co.uk");
         UserPassword = (EditText) findViewById(R.id.editText2);//Initialise Userpassword
-        UserPassword.setText("tanviralix");
-        FirebaseDatabase database_5 = FirebaseDatabase.getInstance();
-        DatabaseReference myRef5 = database_5.getReference("Login");
-        myRef5.child("I" + ("1")).setValue("parth.prs.shah@gmail.com§parth1234§Parth§Shah§07858773873§");
-        myRef5.child("I" + ("2")).setValue("tanvir_ali@hotmail.co.uk§tanvirali§Tanvir§Ali§00000777777§");
+        UserPassword.setText("tanvirali");
+/*
         FirebaseDatabase database_4 = FirebaseDatabase.getInstance();
         DatabaseReference myRef4 = database_4.getReference("Meals");
+        String ID="tanvirali";
+        myRef4.child(ID+"").child("Monday").setValue("Cereals"+"§"+"Chicken & Rice"+"§"+"Pasta"+"§");
+        myRef4.child(ID+"").child("Tuesday").setValue("Cereals"+"§"+"Chicken & Rice"+"§"+"Pasta"+"§");
+        myRef4.child(ID+"").child("Wednesday").setValue("Cereals"+"§"+"Chicken & Rice"+"§"+"Pasta"+"§");
+        myRef4.child(ID+"").child("Thursday").setValue("Cereals"+"§"+"Chicken & Rice"+"§"+"Pasta"+"§");
+        myRef4.child(ID+"").child("Friday").setValue("Cereals"+"§"+"Chicken & Rice"+"§"+"Pasta"+"§");
+        myRef4.child(ID+"").child("Saturday").setValue("Cereals"+"§"+"Chicken & Rice"+"§"+"Pasta"+"§");
+        myRef4.child(ID+"").child("Sunday").setValue("Cereals"+"§"+"Chicken & Rice"+"§"+"Pasta"+"§");*/
 
 
         FirebaseDatabase database_b = FirebaseDatabase.getInstance();//Firebase Object
@@ -156,7 +161,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 FirebaseDatabase database_b1 = FirebaseDatabase.getInstance();
                 String a = UserEmail.getText() + "";
                 String usernamee = getUserName(a + "");
-                final DatabaseReference myRefb1 = database_b1.getReference("Meals").child(usernamee + "");
+                final DatabaseReference myRefb1 = database_b1.getReference("Meals").child(usernamee+ "");
 
                 myRefb1.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -164,7 +169,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                         try {
                             value = "";
                             value = dataSnapshot.getValue().toString();
-                            System.out.println("************************************/////***" + value + "");
+
                         } catch (Exception dfd) {
                         }
                     }
@@ -175,7 +180,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 });
             } catch (Exception df) {
             }
-
+            System.out.println("************************************/////***1");
 
             while (true) {
                 while (value.length() != 0) {
@@ -184,7 +189,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     adapter = new ArrayAdapter<String>(SignInActivity.this, android.R.layout.simple_list_item_1, arrayList);//adapter created and initialised
                     result = value;//store value in result
                     //Get the session unique ID
-                    System.out.println("**********************************" + value + "");//display on console
+                    System.out.println("************************************/////***2");
                     if (result.equals("") == false) { // check if result is not empty
                         lengthh = 0;//length 0
                         for (int i = 0; i < result.length(); i++) { // loop to get total milestone count in the database
