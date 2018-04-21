@@ -158,6 +158,31 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             //{M1=Final Year Project§10§2018/04/01 5:17:17§Task1§10§, M2=Milestone Project§3§2018/04/02 4:17:17§Task1§10§}
 
 
+            try {
+                FirebaseDatabase database_b1 = FirebaseDatabase.getInstance();
+                String a=UserEmail.getText()+"";
+                String usernamee=getUserName(a+"");
+                final DatabaseReference myRefb1 = database_b1.getReference("Milestone").child(usernamee+"");
+
+                myRefb1.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        try {
+                            value="";
+                            value = dataSnapshot.getValue().toString();
+                            System.out.println("************************************/////***"+value+"");
+                        } catch (Exception dfd) {
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                    }
+                });
+            } catch (Exception df) {}
+
+
+
 
 
                     adapter.notifyDataSetChanged();
@@ -171,7 +196,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     });
                     return null;
                 }
-        
+      
         protected void onPostExecute() {
             progress.dismiss();
         }
