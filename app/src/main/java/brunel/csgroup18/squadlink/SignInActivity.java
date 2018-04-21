@@ -137,5 +137,45 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
+//Async task used to execute networking tasks and operations in background.
+
+    class PostClass extends AsyncTask<String, Void, Void> {
+        private final Context context;
+
+        public PostClass(Context c) {
+            this.context = c;
+        }
+
+        protected void onPreExecute() {
+            progress = new ProgressDialog(this.context);
+            progress.setMessage("Loading"); // Loading Sign while network executing queries.
+            progress.show();
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT) // Minimum level KITKAT
+        @Override
+        protected Void doInBackground(String... params) {
+            //{M1=Final Year Project§10§2018/04/01 5:17:17§Task1§10§, M2=Milestone Project§3§2018/04/02 4:17:17§Task1§10§}
+
+
+
+
+                    adapter.notifyDataSetChanged();
+                    SignInActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            progress.dismiss();
+                        }
+                    });
+                    return null;
+                }
+        
+        protected void onPostExecute() {
+            progress.dismiss();
+        }
+    }
+
 
 }
