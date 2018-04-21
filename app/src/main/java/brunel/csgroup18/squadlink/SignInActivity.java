@@ -27,19 +27,19 @@ import java.util.Scanner;
 
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
     public static String PACKAGE_NAME;
-    static String value="",value1="",id="";//Variable Description
-    static String genius[],uid[],ulid;
-    static int datab=0;
+    static String value = "", value1 = "", id = "";//Variable Description
+    static String genius[], uid[], ulid;
+    static int datab = 0;
     static EditText UserEmail, UserPassword;
-    static  String item="",ufname="",ulname="";
+    static String item = "", ufname = "", ulname = "";
     static TextView txtView;
     static ArrayList<String> arrayList;
     static ArrayAdapter<String> adapter;
     static ListView lv;
     static String[] sessions;
-    static  String result="";
-    static int num,lengthh;
-    static int indexx=0;
+    static String result = "";
+    static int num, lengthh;
+    static int indexx = 0;
     private ProgressDialog progress;//ProgressDialog for Async Task (Background Network related Processes)
 
 
@@ -48,7 +48,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         PACKAGE_NAME = getApplicationContext().getPackageName();
-        System.out.println("*************************"+PACKAGE_NAME);
+        System.out.println("*************************" + PACKAGE_NAME);
 
         UserEmail = (EditText) findViewById(R.id.editText);//Initialise UserEmail
         UserEmail.setText("tanvir_ali@hotmail.co.uk");
@@ -56,8 +56,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         UserPassword.setText("tanviralix");
         FirebaseDatabase database_5 = FirebaseDatabase.getInstance();
         DatabaseReference myRef5 = database_5.getReference("Login");
-        myRef5.child("I"+("1")).setValue("parth.prs.shah@gmail.com§parth1234§Parth§Shah§07858773873§");
-        myRef5.child("I"+("2")).setValue("tanvir_ali@hotmail.co.uk§tanvirali§Tanvir§Ali§00000777777§");
+        myRef5.child("I" + ("1")).setValue("parth.prs.shah@gmail.com§parth1234§Parth§Shah§07858773873§");
+        myRef5.child("I" + ("2")).setValue("tanvir_ali@hotmail.co.uk§tanvirali§Tanvir§Ali§00000777777§");
+        FirebaseDatabase database_4 = FirebaseDatabase.getInstance();
+        DatabaseReference myRef4 = database_4.getReference("Meals");
+
 
         FirebaseDatabase database_b = FirebaseDatabase.getInstance();//Firebase Object
         final DatabaseReference myRefb = database_b.getReference("Login");//Child specific object
@@ -77,20 +80,15 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public static String getUserName(String IDD)
-    {
-        String neww="";
-        for(int i=0;i<IDD.length();i++)
-        {
-            char c=IDD.charAt(i);
-            if(c=='@')
-            {
+    public static String getUserName(String IDD) {
+        String neww = "";
+        for (int i = 0; i < IDD.length(); i++) {
+            char c = IDD.charAt(i);
+            if (c == '@') {
                 break;
-            }
-            else if(Character.isDigit(c)==true || Character.isAlphabetic(c)==true)
-            {
+            } else if (Character.isDigit(c) == true || Character.isAlphabetic(c) == true) {
 
-                neww+=c+"";
+                neww += c + "";
             }
         }
         return neww;
@@ -108,7 +106,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             String ID = data.substring(data.indexOf("=") + 1, data.indexOf("§"));//Delimit user IDs
             System.out.println("***********************" + ID);//Display on console
             if (ID.equalsIgnoreCase(UserEmail.getText().toString()) == true) {//Check if user ID entered is correct
-                ulid=ID+"";
+                ulid = ID + "";
                 count++;//If correct, count +1
                 Scanner inn = new Scanner(data).useDelimiter("\\§");// Scanner "inn"
                 int cc = 0;
@@ -160,17 +158,17 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
             try {
                 FirebaseDatabase database_b1 = FirebaseDatabase.getInstance();
-                String a=UserEmail.getText()+"";
-                String usernamee=getUserName(a+"");
-                final DatabaseReference myRefb1 = database_b1.getReference("Milestone").child(usernamee+"");
+                String a = UserEmail.getText() + "";
+                String usernamee = getUserName(a + "");
+                final DatabaseReference myRefb1 = database_b1.getReference("Meals").child(usernamee + "");
 
                 myRefb1.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         try {
-                            value="";
+                            value = "";
                             value = dataSnapshot.getValue().toString();
-                            System.out.println("************************************/////***"+value+"");
+                            System.out.println("************************************/////***" + value + "");
                         } catch (Exception dfd) {
                         }
                     }
@@ -179,10 +177,68 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     public void onCancelled(DatabaseError error) {
                     }
                 });
-            } catch (Exception df) {}
+            } catch (Exception df) {
+            }
 
 
+            while (true) {
+                while (value.length() != 0) {
+                    sessions = null;//Initialise Sessions to null
+                    arrayList = new ArrayList<String>();//Arraylist initialised
+                    adapter = new ArrayAdapter<String>(SignInActivity.this, android.R.layout.simple_list_item_1, arrayList);//adapter created and initialised
+                    result = value;//store value in result
+                    //Get the session unique ID
+                    System.out.println("**********************************" + value + "");//display on console
+                    if (result.equals("") == false) { // check if result is not empty
+                        lengthh = 0;//length 0
+                        for (int i = 0; i < result.length(); i++) { // loop to get total milestone count in the database
+                            char c = result.charAt(i);
+                            if (c == ',') {
+                                lengthh++;
+                            }
+                        }
+                        num = 0;
+                        result = result.substring(1, result.length() - 1); // remove the brackets which we get from the firebase database
+                        System.out.println("*********************" + result);//display updated results on console
+                        sessions = new String[++lengthh];//initialise array with total milestones
 
+                        //Arman is great=Arman is great§20/04/2018§22/04/2018§, FYP=FYP§12/02/2018§14/02/2018§
+                        Scanner in = new Scanner(result).useDelimiter("\\,");
+                        int neww = 0;
+                        while (in.hasNext() == true) {// Whileloop to populate listview in the MainActivity or Home Page
+                            String gen = "";
+                            String G = in.next();
+                            G = G.trim();
+                            if (G.length() != 0) {
+                                G = G.substring(G.indexOf("=") + 1, G.length() - 1);
+                                Scanner innn = new Scanner(G).useDelimiter("\\§");
+                                String itemm = "";
+                                int count = 0;
+                                while (innn.hasNext() == true) {
+                                    String P = innn.next();
+                                    if (count == 0) {
+                                        gen += P + "§";
+                                        itemm = "Milestone Name: " + P + "";
+                                    } else if (count == 1) {
+                                        itemm += '\n' + "Time(Days): " + P + "";
+                                    } else if (count == 2) {
+                                        itemm += '\n' + "Date: " + P + "";
+                                    } /*else if (count == 3) {
+                                    itemm += '\n' + "Task " + P + "";
+                                } else if (count == 4) {
+                                    itemm += '\n' + "Time Frame" + id;
+                                    gen += P + "§";
+                                }*/
+                                    count++;
+                                }
+                                if (num < lengthh) {
+                                    sessions[num++] = G + "";
+                                    adapter.add(itemm + "");
+                                }
+                            }
+
+                        }
+                    }
 
 
                     adapter.notifyDataSetChanged();
@@ -196,11 +252,13 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     });
                     return null;
                 }
-      
+            }
+        }
+
         protected void onPostExecute() {
             progress.dismiss();
         }
+
+
     }
-
-
 }
