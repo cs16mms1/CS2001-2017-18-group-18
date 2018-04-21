@@ -218,11 +218,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                                     String P = innn.next();
                                     if (count == 0) {
                                         gen += P + "§";
-                                        itemm = "Milestone Name: " + P + "";
+                                        itemm = "Breakfast: " + P + "";
                                     } else if (count == 1) {
-                                        itemm += '\n' + "Time(Days): " + P + "";
+                                        itemm += '\n' + "Lunch: " + P + "";
                                     } else if (count == 2) {
-                                        itemm += '\n' + "Date: " + P + "";
+                                        itemm += '\n' + "Dinner: " + P + "";
                                     } /*else if (count == 3) {
                                     itemm += '\n' + "Task " + P + "";
                                 } else if (count == 4) {
@@ -260,5 +260,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         }
 
 
+    }
+    public void onClick1(View view)
+    {
+        Intent a=new Intent(this, UserRegisterActivity.class);
+        startActivity(a);
     }
 }

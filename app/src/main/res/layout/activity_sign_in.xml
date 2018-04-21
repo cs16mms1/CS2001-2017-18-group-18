@@ -113,6 +113,17 @@
             android:onClick="onClick"
             android:text="LOGIN" />
 
+        <TextView
+            android:id="@+id/textview"
+            android:onClick="onClick1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/LOGIN"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="Register"
+            android:textSize="18sp" />
+
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

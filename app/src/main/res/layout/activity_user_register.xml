@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Rl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    tools:context="com.example.ish.askmoreapplicationv1.RegisterPage">
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/ButtonBackToLogin"
+        android:layout_marginTop="32dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/logo" />
+
+    <EditText
+        android:id="@+id/First_Name_Reg"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp"
+        android:hint="First Name"
+        android:paddingLeft="10dp"
+        android:scaleType="fitCenter"
+        android:textColor="#000"
+        android:textColorHint="#000" />
+
+    <EditText
+        android:id="@+id/Last_Name_Reg"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_alignLeft="@+id/First_Name_Reg"
+        android:layout_alignStart="@+id/First_Name_Reg"
+        android:layout_below="@+id/First_Name_Reg"
+        android:layout_marginTop="12dp"
+        android:hint="Last Name"
+        android:paddingLeft="10dp"
+        android:scaleType="fitCenter"
+        android:textColor="#000"
+        android:textColorHint="#000" />
+
+    <EditText
+        android:id="@+id/Email_Reg"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_alignLeft="@+id/Password_Reg"
+        android:layout_alignStart="@+id/Password_Reg"
+        android:layout_below="@+id/Last_Name_Reg"
+        android:layout_marginTop="13dp"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="10dp"
+        android:scaleType="fitCenter"
+        android:textColor="#000"
+        android:textColorHint="#000" />
+
+    <EditText
+        android:id="@+id/Password_Reg"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_alignLeft="@+id/Last_Name_Reg"
+        android:layout_alignStart="@+id/Last_Name_Reg"
+        android:layout_below="@+id/Email_Reg"
+        android:layout_marginTop="12dp"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:paddingLeft="10dp"
+        android:scaleType="fitCenter"
+        android:textColor="#000"
+        android:textColorHint="#000" />
+
+    <EditText
+        android:id="@+id/Number_Reg"
+        android:layout_width="350dp"
+        android:layout_height="60dp"
+        android:layout_alignLeft="@+id/Password_Reg"
+        android:layout_alignStart="@+id/Password_Reg"
+        android:layout_below="@+id/Password_Reg"
+        android:layout_marginTop="15dp"
+        android:hint="Number"
+        android:inputType="number"
+        android:paddingLeft="10dp"
+        android:scaleType="fitCenter"
+        android:textColor="#000"
+        android:textColorHint="#000" />
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/Number_Reg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:onClick="RegButton"
+        android:scaleType="fitCenter" />
+
+    <Button
+        android:id="@+id/ButtonBackToLogin"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="22dp" />
+
+</RelativeLayout>
