@@ -72,6 +72,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         onNavigationItemSelected(navigationView.getMenu().getItem(0));
 
 
+        lv = (ListView) findViewById(R.id.listview);//Initialising ListView
+        try {
+            lv.setAdapter(SignInActivity.adapter);
+            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position,
+                                        long id) {
+                    item = ((TextView) view).getText().toString();
+  
+
+
+
+                }
+            });
+        }catch (Exception ds){}
     }
 
     @Override
