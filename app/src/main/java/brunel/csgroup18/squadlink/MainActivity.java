@@ -81,8 +81,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 public void onItemClick(AdapterView<?> parent, View view, int position,
                                         long id) {
                     item = ((TextView) view).getText().toString();
-  
+                    String[] result = item.split("\n", 3); // Delimit the string upto 2nd line
+                    result[0]=result[0].substring(result[0].indexOf(":")+1, result[0].length());//get first line
+                    result[0]=result[0].trim();//trim the first line
 
+                    result[1]=result[1].substring(result[1].indexOf(":")+1, result[1].length());//get first line
+                    result[1]=result[1].trim();//trim the first line
+
+                    result[2]=result[2].substring(result[2].indexOf(":")+1, result[2].length());//get first line
+                    result[2]=result[2].trim();//trim the first line
+
+                    name=result[0]+"";//store it in name
+                    startdate=result[1]+"";
+                    enddate=result[2]+"";
+                    indexx = position;//store the position in indexx
 
 
                 }
