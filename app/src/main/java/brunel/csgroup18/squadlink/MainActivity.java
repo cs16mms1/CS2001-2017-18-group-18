@@ -35,6 +35,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private Toolbar mToolbar;
+    static String value="",value1="",id="";//Variable Description
+    static int indexx=0;//Variable Description
+    static  String item="";//Variable Description
+    static String startdate="", enddate="", name="";//Variable Description
+    private ProgressDialog progress;//ProgressDialog for Async Task (Background Network related Processes)
+    static ArrayList<String> arrayList;
+    static ArrayAdapter<String> adapter;
+    static ListView lv;
+    TextView nav;
+    static String[] sessions;
+    static  String result="";
 
 
     @Override
