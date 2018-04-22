@@ -1,5 +1,7 @@
 package brunel.csgroup18.squadlink;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -43,6 +45,7 @@ public class UserRegisterActivity extends AppCompatActivity {
         UserPassword = (EditText) findViewById(R.id.Password_Reg);
         UserNumber = (EditText) findViewById(R.id.Number_Reg);
     }
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void RegButton (View view)
     {
         String firstname = UserFirstName.getText().toString();
@@ -59,6 +62,16 @@ public class UserRegisterActivity extends AppCompatActivity {
         FirebaseDatabase database_5 = FirebaseDatabase.getInstance();
         DatabaseReference myRef5 = database_5.getReference("Login");
         myRef5.child("I"+(count)).setValue(email+"§"+password+"§"+firstname+"§"+lastname+"§"+number+"§");
+        FirebaseDatabase database_4 = FirebaseDatabase.getInstance();
+        DatabaseReference myRef4 = database_4.getReference("Meals");
+        String ID=SignInActivity.getUserName(SignInActivity.UserEmail.getText()+"");
+        myRef4.child(ID+"").child("Monday").setValue("Cereals"+"§"+"Chicken & Rice"+"§"+"Pasta"+"§");
+        myRef4.child(ID+"").child("Tuesday").setValue("Cereals"+"§"+"Chicken & Rice"+"§"+"Pasta"+"§");
+        myRef4.child(ID+"").child("Wednesday").setValue("Cereals"+"§"+"Chicken & Rice"+"§"+"Pasta"+"§");
+        myRef4.child(ID+"").child("Thursday").setValue("Cereals"+"§"+"Chicken & Rice"+"§"+"Pasta"+"§");
+        myRef4.child(ID+"").child("Friday").setValue("Cereals"+"§"+"Chicken & Rice"+"§"+"Pasta"+"§");
+        myRef4.child(ID+"").child("Saturday").setValue("Cereals"+"§"+"Chicken & Rice"+"§"+"Pasta"+"§");
+        myRef4.child(ID+"").child("Sunday").setValue("Cereals"+"§"+"Chicken & Rice"+"§"+"Pasta"+"§");
         Toast.makeText(getBaseContext(),"Sucessfully Registered!",Toast.LENGTH_LONG).show();
         finish();
     }

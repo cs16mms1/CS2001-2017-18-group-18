@@ -4,7 +4,7 @@
     android:id="@+id/Rl"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    tools:context="com.example.ish.askmoreapplicationv1.RegisterPage">
+    tools:context="brunel.csgroup18.squadlink.UserRegisterActivity">
 
     <ImageView
         android:id="@+id/background"
@@ -18,7 +18,7 @@
         android:layout_height="100dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/ButtonBackToLogin"
+
         android:layout_marginTop="32dp"
         android:scaleType="fitCenter"
         android:src="@drawable/logo" />

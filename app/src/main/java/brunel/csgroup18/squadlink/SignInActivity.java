@@ -202,7 +202,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                         result = result.substring(1, result.length() - 1); // remove the brackets which we get from the firebase database
                         System.out.println("*********************" + result);//display updated results on console
                         sessions = new String[++lengthh];//initialise array with total milestones
-
+                        String dayss[]={"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+                        int daycnt=0;
                         //Arman is great=Arman is great§20/04/2018§22/04/2018§, FYP=FYP§12/02/2018§14/02/2018§
                         Scanner in = new Scanner(result).useDelimiter("\\,");
                         int neww = 0;
@@ -219,7 +220,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                                     String P = innn.next();
                                     if (count == 0) {
                                         gen += P + "§";
-                                        itemm = "Breakfast: " + P + "";
+                                        itemm=dayss[daycnt++]+"";
+                                        itemm+= '\n' +"Breakfast: " + P + "";
                                     } else if (count == 1) {
                                         itemm += '\n' + "Lunch: " + P + "";
                                     } else if (count == 2) {
