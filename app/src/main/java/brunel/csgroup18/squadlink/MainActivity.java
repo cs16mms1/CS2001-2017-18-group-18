@@ -97,6 +97,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     indexx = position;//store the position in indexx
 
 
+                    try {
+                        FirebaseDatabase database_b1 = FirebaseDatabase.getInstance();
+                        String a=SignInActivity.UserEmail.getText()+"";
+                        String usernamee=SignInActivity.getUserName(a+"");
+                        final DatabaseReference myRefb1 = database_b1.getReference("Meals").child(usernamee+"").child(result[0]+"");
+
+                        myRefb1.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                try {
+                                    value="";
+                                    value = dataSnapshot.getValue().toString();
+                                    System.out.println("************************************/////***"+value+"");
+                                } catch (Exception dfd) {
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError error) {
+                            }
+                        });
+                    } catch (Exception df) {}
+
+
+
                 }
             });
         }catch (Exception ds){}
