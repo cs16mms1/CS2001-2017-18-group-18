@@ -162,10 +162,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             break;
             case(R.id.nav_training_plans):{
-                TrainingPlansFragment trainingFragment = new TrainingPlansFragment();
-                ft.replace(R.id.fragment_container, trainingFragment);
-                ft.commit();
-                mToolbar.setTitle("Training Plans");
+               Intent a=new Intent(this, TrainingPlansActivity.class);
+               startActivity(a);
             }
 
             break;
